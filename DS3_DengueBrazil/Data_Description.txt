@@ -1,0 +1,38 @@
+###########################################################
+### Spatio-temporal analysis of dengue cases in Brazil  ###
+###########################################################
+
+This project focuses on the spatio-temporal variability of dengue in Brazil, and its possible relationship with climate-related variables.
+Dengue fever is a mosquito-borne disease transmitted through the bite of female Aedes mosquito infected with dengue virus serotypes, and it is known to be a climate-sensitive disease. In fact, climatic factors can influence the transmission of dengue by affecting mosquito growth dynamics, virus replication, and mosquito–human interactions.
+
+The aim of this project is to develop a spatio-temporal analysis of dengue cases in Brazil during the period 2015–2019 in relationship to climatic stressors, using the Brazilian microregions as unit of analysis. 
+The microregions are based on a geographical structure provided by the Brazilian Institute of Geography and Statistics (IBGE). 
+Monthly dengue cases have been obtained from the Notifiable Diseases Information System, which is freely available via the Ministry of Health Information Department (DATASUS). 
+A drought index, known as the self-calbrated Palmer's drought severity index (PDSI) was retived from the Climatic Research Unit  (https://crudata.uea.ac.uk/cru/data/drought/). 
+Additionally data on maximum temperature (from https://www.uea.ac.uk/groups-and-centres/climatic-research-unit) is also available.
+
+The data are collected in a .csv file called “dengue_2015_2019.csv”. It includes the following variables:
+- code: Microregion code (this is the code identifier to match the shapefile)
+- micro_name: Microregion name
+- micro_name_ibge: Microregion name from IBGE 
+- region_code: Region code	
+- region_name: Region name	
+- month: Month of the year
+- year: Year (2015:2019)
+- dengue_cases: Notified dengue cases
+- population: Population estimated for each microregion
+- tmax: Monthly maximum temperature for each microregion 
+- pdsi: Self-calbrated Palmer's drought severity index (PDSI) for each microregion (a measure of how wet or dry a region is relative to usual conditions). Negative values represent periods of drought, positive values represent wetter periods 
+- ID_time: Time identifier
+- ID_space: Area identifier (Microregion)
+
+The shape file for Brazil is additionally provided.
+
+IMPORTANT NOTE:
+- The PDSI was missing for the island FERNANDO DE NORONHA with microregion code 26019, thus we excluded this microregion from the data set, so that you have now 557 microregions. Therefore, you should remove this microregion from the shapefile as well, before obtaining the graph for INLA (this is easy to do after importing the shapefile into R using the sf and dplyr packages).
+
+SUGGESTIONS: 
+- The number of expected cases is not available, but you can include an offset based on the population into the inla() function, computing: dengue_2015_2019$E  <- dengue_2015_2019$population/10^5 
+This will be interpreted as the model offset so that the response is equivalent to an incidence rate per 100,000 people. Then, you can specify into the inla function: offset=log(E)
+- We have provided two covariates: maximum temperature and PDSI. It is up to you to decide how to include these covariates into the model (i.e. categorical or continuous).
+
