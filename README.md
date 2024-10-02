@@ -3,7 +3,6 @@
 ### Overview
 This project is an individual submission for the Advanced Analysis course. It involves an ecological study focusing on the spatial-temporal dynamics of dengue fever in Brazil from 2015 to 2019. Using a Bayesian hierarchical model, this analysis aims to explore the relationships between climatic variables—such as monthly maximum temperature and Palmer’s drought severity index (PDSI)—and dengue incidence across 557 microregions over 60 months. The results contribute to understanding the patterns of dengue transmission and can aid in informing public health interventions.
 
-### Key Features
 - **Study Objective:** Investigate the spatial and temporal patterns of dengue fever and its association with climatic factors.
 - **Data Sources:** Dengue case data from Brazil's Notifiable Diseases Information System (DATASUS) and climatic data from the Climatic Research Unit. Dataset used can be found in [here](DS3_DengueBrazil).
 - **Modelling Approach:** Utilised Bayesian hierarchical models and spatial generalised linear mixed-effect models (GLMM) with type I interaction to predict dengue incidence.
